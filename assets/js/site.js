@@ -43,19 +43,43 @@ function initApp() {
 function setupStatics() {
 console.log('setupStatics called');
     const newButton = document.getElementById('newListButton');
-    newListButton.addEventListener('click', newCallback);
+    newButton.addEventListener('click', newCallback);
       listView();
 }
 
  // #endregion
 
+ function listClickCallback(action,index) {
+    console.log(action,index)
+    
+ }
+
+
+ 
 // #region callbacks
 //---------------------------------------------------------------------------------------------------------------------
 //- Callbacks with switch to handle different functions and appState
 //---------------------------------------------------------------------------------------------------------------------
 
 // Callback for creating a new list (model code) with switch and appState
-function newCallback(){}
+
+
+// Callback for creating a new list based on user input
+function newCallback(userChoice) {
+    switch (userChoice) {
+        case "fruits":
+            appState.currentList = ["🍎 Apple", "🍌 Banana", "🍊 Orange"];
+            break;
+            
+        default:
+            appState.currentList = [];
+            console.warn("Unknown choice, created an empty list.");
+    }
+
+    // Example: print new list to console or UI
+    console.log("New list created:", appState.currentList);
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,6 +187,7 @@ function newItemCreationView(){
 
 //---------------------------------------------------------------------------------------------------------------
 // List view part of the view code that generates list views to show user the saved lists
+
 function listView(){
     
     mainContent.innerHTML = '';
